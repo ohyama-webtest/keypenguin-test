@@ -1,0 +1,2095 @@
+$breakpoints: (
+  "sp-sm": "screen and (max-width: 390px)",
+  "sp": "screen and (max-width: 500px)",
+  "tab": "screen and (max-width: 900px)",
+  "header": "screen and (max-width: 1000px)",
+  "pc": "screen and (max-width: 1200px)",
+  "solution": "screen and (max-width: 1300px)",
+);
+
+@mixin mq($breakpoint) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+$text-black: #333;
+$theme-red: #e50142;
+$theme-blue: #2d568e;
+$theme-blue-green: #45bcb7;
+
+@mixin co-headline-bold {
+  font-family: co-headline, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+@mixin co-headline-regular {
+  font-family: co-headline, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+// 共通パーツ開始
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  color: $text-black;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+a {
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+img {
+  width: 100%;
+}
+// テキストのマーカー線
+.line-marker {
+  background: linear-gradient(transparent 70%, rgba($color: $theme-blue-green, $alpha: 0.3) 70%);
+
+  span {
+    @include co-headline-bold();
+  }
+}
+.line-marker-white {
+  background: linear-gradient(transparent 70%, rgba($color: white, $alpha: 0.3) 70%);
+
+  span {
+    @include co-headline-bold();
+  }
+}
+// テキストのマーカー線
+
+// ロゴ
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .logo-left {
+    width: 50px;
+  } // left
+  .logo-right {
+    @include co-headline-bold();
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: .23em;
+    line-height: calc(23 / 18);
+    color: $text-black;
+
+    @include mq(sp){
+      font-size: 14px;
+
+    }
+  }
+}
+// ロゴ
+
+// 下層ページの見出し
+.bottom-page-heading {
+  font-size: 64px;
+  @include co-headline-bold();
+  line-height: 54px;
+  letter-spacing: 0.05em;
+
+  @include mq(tab) {
+    font-size: 48px;
+    line-height: 44px;
+  }
+  @include mq(sp) {
+    font-size: 40px;
+    line-height: 38px;
+  }
+
+  .english {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 28px;
+    color: $theme-blue-green;
+
+    @include mq(tab) {
+      font-size: 24px;
+    }
+
+    span {
+      @include co-headline-bold();
+    }
+  }
+}
+// 下層ページの見出し
+
+.title-wrapper {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  justify-content: center;
+
+  @include mq(tab) {
+    flex-direction: column-reverse;
+    gap: 0;
+    width: 100%;
+  }
+
+  .bottom-page-heading {
+    width: 100%;
+  }
+  .img {
+    width: 100%;
+
+    @include mq(tab) {
+      max-width: 70%;
+    }
+    @include mq(sp) {
+      max-width: 100%;
+    }
+  }
+} // title-wrapper
+
+// ボタン
+.green-blue-btn-wrapper {
+  text-align: center;
+
+  .btn {
+    // min-width: 350px;
+    max-width: 350px;
+    width: 100%;
+    display: inline-block;
+    padding: 22px 0;
+    border: 3px solid $theme-blue-green;
+    color: $theme-blue-green !important;
+    transition: all 0.3s;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: calc(24 / 20);
+
+    @include mq(tab){
+      font-size: 18px;
+      padding: 15px 0;
+    }
+    
+    @include mq(sp) {
+      min-width: 0px;
+      max-width: 280px;
+      background-color: $theme-blue-green;
+      color: white !important;
+    }
+
+    &:hover {
+      background-color: $theme-blue-green;
+      color: white !important;
+    }
+  }
+}
+// ボタン
+
+
+/*ーーーーーーーーーーーーーーーーーーーーーーーー
+共通パーツ終了
+ーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+
+/*ーーーーーーーーーーーーーーーーーーーーーーーー
+アニメーション開始
+ーーーーーーーーーーーーーーーーーーーーーーーー　*/
+.eachTextAnime span{
+  opacity: 0;
+}
+.eachTextAnime-now span{
+  opacity: 0;
+}
+.eachTextAnime.appeartext span{ animation:text_anime_on .4s ease-out forwards; }
+@keyframes text_anime_on {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+// 左から右へ蛍光線が
+.slide-in {
+	overflow: hidden;
+    display: inline-block;
+}
+
+.slide-in_inner {
+	display: inline-block;
+
+}
+
+/*左右のアニメーション*/
+.leftAnime{
+    opacity: 0;/*事前に透過0にして消しておく*/
+}
+
+.slideAnimeLeftRight {
+	animation-name:slideTextX100;
+	animation-duration:0.8s;
+	animation-fill-mode:forwards;
+    opacity: 0;
+}
+
+@keyframes slideTextX100 {
+  from {
+	transform: translateX(-100%); /*要素を左の枠外に移動*/
+        opacity: 0;
+  }
+
+  to {
+	transform: translateX(0);/*要素を元の位置に移動*/
+    opacity: 1;
+  }
+}
+
+.slideAnimeRightLeft {
+	animation-name:slideTextX-100;
+	animation-duration:0.8s;
+	animation-fill-mode:forwards;
+    opacity: 0;
+}
+
+
+@keyframes slideTextX-100 {
+  from {
+	transform: translateX(100%);/*要素を右の枠外に移動*/
+    opacity: 0;
+  }
+
+  to {
+	transform: translateX(0);/*要素を元の位置に移動*/
+    opacity: 1;
+  }
+}
+// 左から右へ蛍光線が
+
+
+// fadeUp
+.fadeUp{
+  animation-name:fadeUpAnime;
+  animation-duration:0.5s;
+  animation-fill-mode:forwards;
+  opacity:0;
+  }
+  
+  @keyframes fadeUpAnime{
+    from {
+      opacity: 0;
+    transform: translateY(100px);
+    }
+  
+    to {
+      opacity: 1;
+    transform: translateY(0);
+    }
+  }
+  
+  
+  /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+  .fadeUpTrigger{
+      opacity: 0;
+  }
+  
+// fadeUp
+
+/*ーーーーーーーーーーーーーーーーーーーーーーー
+アニメーション終了
+ーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+
+// header開始
+header {
+  padding: 25px 145px;
+  box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  background-color: #fff;
+
+  @include mq(pc) {
+    padding: 25px 20px;
+  }
+  @include mq(sp) {
+    padding: 10px 24px;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .left {
+    }
+    .right {
+      display: flex;
+      gap: 45px;
+      margin-left: auto;
+
+      @include mq(header) {
+        display: none;
+      }
+
+      li {
+        a {
+          color: $text-black;
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    } // right
+    .header-btn {
+      margin-left: 45px;
+
+      @include mq(header) {
+        display: none;
+      }
+
+      a {
+        padding: 16px 39px;
+        background-color: $theme-red;
+        border-radius: 100vh;
+        font-weight: bold;
+        color: white;
+      }
+    } //  header-btn
+    .sp-hamburger {
+      display: none;
+      width: 50px;
+      height: 50px;
+      margin-left: auto;
+      position: relative;
+      cursor: pointer;
+
+      @include mq(header) {
+        display: block;
+      }
+      span {
+        width: 30px;
+        height: 3px;
+        background-color: #000;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .line1 {
+        top: 12px;
+      }
+      .line2 {
+        top: 21px;
+      }
+      .line3 {
+        top: 30px;
+      }
+    } // sp-hamburger
+  } // header-container
+}
+// header終了
+
+// header-sp開始
+.header-sp {
+  display: none;
+
+  @include mq(header) {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $theme-blue;
+    z-index: 20;
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-sp-close {
+    display: none;
+
+    @include mq(header) {
+      display: block;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: 50px;
+      right: 10px;
+      cursor: pointer;
+    }
+    @include mq(sp) {
+      top: 35px;
+      right: 15px;
+    }
+
+    span {
+      width: 30px;
+      height: 3px;
+      background-color: #000;
+      position: absolute;
+    }
+    .line1 {
+      transform: rotate(45deg);
+    }
+    .line2 {
+      transform: rotate(-45deg);
+    }
+  } // header-sp-close
+  .header-sp-items {
+    display: none;
+
+    ul {
+      li {
+        text-align: center;
+        margin-bottom: 60px;
+
+        a {
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+
+          @include mq(sp){
+            font-size: 20px;
+          }
+        }
+      } // li
+      .header-sp-contact {
+        @include mq(header) {
+          margin-bottom: 0;
+          margin-top: 100px;
+        }
+
+        a {
+          @include mq(header) {
+            padding: 24px 53px 24px;
+            background-color: $theme-red;
+            border-radius: 50px;
+            box-shadow: rgba(0, 0, 0, 0.16);
+
+            @include mq(sp){
+              font-size: 20px;
+              padding: 15px 45px;
+            }
+          }
+        }
+      }
+    } // ul
+  } // header-sp-items
+}
+// header-sp終了
+
+// fv開始
+.fv {
+  background-image: url(../images/top-fv.png);
+  background-size: cover;
+  padding-top: 245px;
+  padding-bottom: 294px;
+  background-position: center bottom;
+
+  @include mq(sp) {
+    padding-top: 200px;
+    // padding-bottom: 250px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 64px;
+    line-height: 110px;
+    letter-spacing: 0.05em;
+    color: white;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    @include mq(tab) {
+      font-size: 40px;
+      line-height: 80px;
+      max-width: 700px;
+    }
+    @include mq(sp) {
+      font-size: 29.5px;
+      line-height: 60px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    @include mq(sp-sm) {
+      font-size: 26px;
+    }
+
+    span {
+      @include co-headline-bold();
+    }
+  } // h2
+  .fv-lead {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    font-weight: 400;
+    margin-top: 30px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    @include mq(sp) {
+      font-size: 16px;
+      padding-left: 24px;
+      padding-right: 24px;
+      text-align: left;
+      margin-top: 15px;
+      line-height: calc(25 / 16);
+    }
+
+    span {
+      @include co-headline-regular();
+    }
+    .tab {
+      display: none;
+      @include mq(sp) {
+        display: block;
+      }
+    }
+  }
+}
+// fv終了
+
+// problem開始
+.problem {
+  margin-top: 87px;
+  position: relative;
+  padding-top: 104px;
+  padding-bottom: 64px;
+
+  @include mq(sp) {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 37px;
+  }
+
+  .problem-bg-gray {
+    background-color: #f5f5f5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    border-radius: 150px 0 0 150px;
+    margin-left: 240px;
+
+    @include mq(pc) {
+      margin-left: 100px;
+    }
+    @include mq(header) {
+      margin-left: 40px;
+    }
+    @include mq(tab) {
+      margin-left: 24px;
+      border-radius: 75px 0 0 75px;
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+
+    @include mq(sp) {
+      padding-right: 5px;
+      padding-left: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      line-height: 42px;
+      letter-spacing: 0.05em;
+      @include mq(sp) {
+        font-size: 20px;
+        line-height: 35px;
+      }
+
+      .english {
+        color: $theme-blue-green;
+        @include co-headline-bold();
+        font-size: 24px;
+        letter-spacing: 0.05em;
+
+        @include mq(sp) {
+          font-size: 18px;
+        }
+      }
+    } // h2
+    .problem-items {
+      max-width: 700px;
+      margin: 0 auto;
+      margin-top: 80px;
+
+      @include mq(tab) {
+        margin-top: 50px;
+      }
+
+      .problem-item {
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        gap: 50px;
+        margin-top: 50px;
+
+        @include mq(tab) {
+          gap: 20px;
+        }
+        @include mq(sp) {
+          gap: 0px;
+        }
+
+        .item-left {
+          width: 200px;
+
+          @include mq(tab) {
+            width: 150px;
+            min-width: 150px;
+          }
+          @include mq(sp) {
+            width: 100px;
+            min-width: 100px;
+          }
+        } // .item-left
+        .item-right {
+          h3 {
+            font-size: 28px;
+            color: #888;
+            letter-spacing: 0.05em;
+
+            @include mq(tab) {
+              font-size: 24px;
+            }
+            @include mq(sp) {
+              font-size: 18px;
+            }
+          }
+          .item-right-text {
+            margin-top: 20px;
+            font-size: 18px;
+            @include mq(tab) {
+              font-size: 16px;
+            }
+            @include mq(sp) {
+              font-size: 14px;
+            }
+          }
+        } // .item-right
+      } // problem-item
+    } // problem-items
+    .dots {
+      position: absolute;
+      bottom: -155px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: $theme-blue-green;
+        margin-bottom: 25px;
+      }
+      &:first-child {
+        // margin-bottom: ;
+      }
+    } // dots
+  } // container
+}
+// problem終了
+
+// solution開始
+.solution {
+  margin-top: 163px;
+
+  @include mq(tab) {
+    margin-top: 140px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 32px;
+    line-height: 42px;
+    letter-spacing: 0.05em;
+    @include mq(sp) {
+      font-size: 24px;
+      line-height: 40px;
+    }
+
+    .english {
+      color: $theme-blue-green;
+      @include co-headline-bold();
+      font-size: 24px;
+      letter-spacing: 0.05em;
+
+      @include mq(sp) {
+        font-size: 20px;
+      }
+    }
+  } // h2
+  .solution-items {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 70px;
+    position: relative;
+    z-index: 2;
+
+    @include mq(tab) {
+      margin-top: 60px;
+    }
+    @include mq(sp) {
+      margin-top: 30px;
+      padding-left: 24px;
+      padding-right: 24px;
+      gap: 10px;
+    }
+
+    .solution-item {
+      width: 200px;
+    }
+  } // solution-items
+  .solution-bottom-wrapper {
+    position: relative;
+    padding-top: 164px;
+    padding-bottom: 120px;
+    margin-top: 40px;
+
+    @include mq(sp) {
+      padding-top: 98px;
+      margin-top: -50px;
+    }
+
+    .solution-bg {
+      background-color: #f5f5f5;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 0;
+      border-radius: 0 200px 200px 0;
+      margin-right: 140px;
+      background-image: linear-gradient(120deg, $theme-blue-green, $theme-blue);
+      z-index: 0;
+
+      @include mq(solution) {
+        border-radius: 0 75px 75px 0;
+        margin-right: 24px;
+      }
+      @include mq(sp-sm) {
+        margin-right: 12px;
+      }
+    } // solution-bg
+    .container {
+      position: relative;
+      z-index: 1;
+      padding-left: 20px;
+      padding-right: 20px;
+
+      @include mq(pc) {
+        padding-right: 48px;
+      }
+
+      @include mq(tab) {
+        padding-left: 25px;
+        padding-right: 48px;
+      }
+      @include mq(sp-sm) {
+        padding-right: 24px;
+        padding-left: 12px;
+      }
+
+      .solution-points {
+        .solution-point {
+          display: flex;
+          align-items: center;
+          background-color: #fff;
+          padding: 46px 50px 24px;
+          margin-top: 144px;
+          position: relative;
+          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+          @include mq(tab) {
+            margin-top: 90px;
+            padding: 33px 10px 30px;
+          }
+          @include mq(sp) {
+            margin-top: 30px;
+          }
+
+          &:first-child {
+            margin-top: 0;
+          }
+
+          .num {
+            @include co-headline-bold();
+            font-size: 100px;
+            color: $theme-blue;
+            position: absolute;
+            top: -65px;
+            left: 25px;
+
+            @include mq(tab) {
+              font-size: 45px;
+              left: 10px;
+              top: -30px;
+            }
+            @include mq(sp) {
+              font-size: 30px;
+              left: 5px;
+              top: -20px;
+            }
+          }
+
+          .left {
+            h3 {
+              font-size: 32px;
+
+              @include mq(tab) {
+                font-size: 23px;
+              }
+              @include mq(sp) {
+                font-size: 18px;
+              }
+            }
+            .solution-point-text {
+              margin-top: 30px;
+              font-size: 18px;
+              line-height: calc(30 / 18);
+
+              @include mq(tab) {
+                font-size: 16px;
+                margin-top: 18px;
+              }
+              @include mq(sp) {
+                font-size: 14px;
+                margin-top: 18px;
+              }
+            }
+          } // left
+          .right {
+            margin-left: auto;
+            width: 200px;
+
+            @include mq(tab) {
+              display: none;
+            }
+          } // right
+          &:last-of-type {
+            padding: 89px 50px 67px;
+
+            @include mq(tab) {
+              padding: 33px 10px 30px;
+            }
+          }
+        } // solution-point
+      } // solution-points
+      .solution-bottom-items {
+        display: flex;
+        justify-content: center;
+        gap: 55px;
+        margin-top: -30px;
+        position: relative;
+        z-index: 1;
+
+        @include mq(tab) {
+          flex-direction: column;
+          padding-left: 35px;
+          padding-right: 35px;
+          gap: 8px;
+          margin-top: -15px;
+        }
+        @include mq(sp) {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+
+        .solution-bottom-item {
+          background-color: #fff;
+          padding: 10px 25px 20px;
+          box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.16);
+          border-radius: 15px;
+
+          @include mq(tab) {
+            position: relative;
+            padding: 22px 21px 13px 20px;
+          }
+
+          .image {
+            width: 150px;
+            margin: 0 auto;
+
+            @include mq(tab) {
+              width: 70px;
+              position: absolute;
+              top: 10px;
+              right: 0px;
+            }
+          }
+          h3 {
+            color: $theme-blue-green;
+            font-size: 20px;
+
+            @include mq(tab) {
+              font-size: 18px;
+            }
+            @include mq(sp) {
+              font-size: 16px;
+            }
+          }
+          .text {
+            font-size: 14px;
+            margin-top: 30px;
+            text-align: center;
+            @include mq(sp) {
+              font-size: 14px;
+              margin-top: 22px;
+              text-align: left;
+            }
+            @include mq(tab) {
+              font-size: 12px;
+              margin-top: 16px;
+              text-align: left;
+            }
+            .tab-hide {
+              @include mq(tab) {
+                display: none;
+              }
+            }
+          }
+        } // solution-bottom-item
+      } // solution-bottom-item
+      .green-blue-btn-wrapper {
+        text-align: center;
+        margin-top: 130px;
+
+        @include mq(tab){
+          margin-top: 80px;
+        }
+        
+        .btn {
+          // min-width: 350px;
+          max-width: 400px;
+          width: 100%;
+          display: inline-block;
+          padding: 26px 0 24px;
+          border: 3px solid $theme-blue-green;
+          color: white !important;
+          background-color: $theme-blue-green;
+          transition: all 0.3s;
+          font-size: 24px;
+          font-weight: bold;
+          line-height: calc(24 / 20);
+          z-index: 1;
+          
+          &:hover {
+            background-color: white;
+            color: $theme-blue-green !important;
+            opacity: 1;
+          }
+          @include mq(tab){
+            font-size: 18px;
+            padding: 15px 0;
+          }
+          
+          @include mq(sp) {
+            min-width: 0px;
+            max-width: 280px;
+          }
+      
+        } // btn
+      } // btn-wrapper
+    } // container
+  } // solution-bottom-wrapper
+}
+// solution終了
+
+// contact開始
+.contact {
+  background-image: url(../images/contact-bg.png);
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  margin-top: 200px;
+
+  @include mq(sp) {
+    padding-top: 30px;
+    padding-bottom: 60px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 50px;
+    letter-spacing: 0.05em;
+    color: white;
+    line-height: 0.9;
+    @include co-headline-bold();
+
+    @include mq(tab) {
+      font-size: 40px;
+    }
+    @include mq(tab) {
+      font-size: 32px;
+    }
+
+    span {
+      font-size: 20px;
+      letter-spacing: 0.23em;
+
+      @include mq(tab) {
+        font-size: 18px;
+      }
+      @include mq(tab) {
+        font-size: 16px;
+      }
+    }
+  } // h2
+  .btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+    gap: 80px;
+
+    @include mq(tab) {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .btn {
+      max-width: 350px;
+      width: 100%;
+      text-align: center;
+
+      @include mq(sp-sm) {
+        max-width: 300px;
+      }
+
+      a {
+        display: inline-block;
+        max-width: 350px;
+        width: 100%;
+        border-radius: 100vh;
+        background-color: $theme-red;
+        color: white;
+        border: 3px solid $theme-red;
+        transition: all 0.3s;
+        font-weight: bold;
+        padding: 20px 50px;
+
+        &:hover {
+          color: $theme-red;
+          background-color: #fff;
+          opacity: 1;
+        }
+      }
+    } // btn
+    .btn-white {
+      a {
+        background-color: #fff;
+        border: 3px solid $theme-red;
+        color: $theme-red;
+        box-sizing: border-box;
+
+        &:hover {
+          background-color: $theme-red;
+          color: white;
+        }
+      }
+    } // btn-white
+  } // btn-wrapper
+}
+// contact終了
+
+// footer開始
+footer {
+  padding: 50px 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+
+    .left {
+    }
+    .right {
+      display: flex;
+      margin-left: auto;
+      gap: 45px;
+
+      @include mq(tab) {
+        display: none;
+      }
+
+      li {
+        a {
+          font-size: 14px;
+          font-weight: bold;
+          color: $text-black;
+        }
+      }
+    }
+  } // container
+}
+// footer終了
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  service-price.html開始
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+// service-flow開始
+.service-flow {
+  padding-top: 190px;
+  padding-bottom: 150px;
+  background-image: linear-gradient(120deg, $theme-blue-green, $theme-blue);
+  background-color: $theme-blue-green;
+
+  @include mq(tab) {
+    padding-bottom: 120px;
+  }
+
+  @include mq(sp) {
+    padding-top: 150px;
+    padding-bottom: 100px;
+  }
+
+  .container {
+    .bottom-page-heading {
+      color: white;
+
+      .english {
+        color: white;
+      }
+    } // heading
+    .service-flow-items {
+      margin-top: 105px;
+
+      @include mq(tab) {
+        margin-top: 70px;
+      }
+      @include mq(sp) {
+        margin-top: 54px;
+      }
+
+      .service-flow-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        background-color: #fff;
+        padding: 50px 30px;
+        border-radius: 30px;
+        box-shadow: 0 1px 10px rgba($color: #fff, $alpha: 0.1);
+        margin-top: 50px;
+
+        @include mq(tab) {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 25px;
+          padding: 30px 20px;
+        }
+
+        @include mq(tab) {
+          padding: 20px 20px;
+        }
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        .service-flow-item-num {
+          width: 100px;
+          min-width: 100px;
+          background-color: $theme-blue;
+          text-align: center;
+          color: white;
+          padding: 15px 0;
+          @include co-headline-bold();
+          font-size: 14px;
+          letter-spacing: 0.05em;
+          line-height: calc(18 / 14);
+          border-radius: 50%;
+
+          @include mq(sp) {
+            line-height: calc(13 / 10);
+            width: 50px;
+            min-width: 50px;
+            padding: 8px 0 6px;
+            font-size: 10px;
+          }
+
+          span {
+            font-size: 40px;
+            line-height: calc(51 / 40);
+
+            @include mq(sp) {
+              font-size: 20px;
+              line-height: calc(26 / 20);
+            }
+          }
+        } // num
+        .service-flow-item-img {
+          width: 150px;
+          min-width: 150px;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+
+          @include mq(sp) {
+            width: 100px;
+            min-width: 100px;
+          }
+        } // img
+        .service-flow-item-texts {
+          h3 {
+            font-size: 28px;
+
+            @include mq(sp) {
+              font-size: 18px;
+            }
+          }
+          .text {
+            margin-top: 40px;
+            line-height: calc(30 / 16);
+
+            @include mq(tab) {
+              margin-top: 25px;
+              font-size: 15px;
+            }
+            @include mq(sp) {
+              margin-top: 17px;
+              font-size: 14px;
+              line-height: calc(20 / 14);
+            }
+          }
+          .flex-text {
+            display: flex;
+            gap: 20px;
+            margin-top: 23px;
+
+            @include mq(tab) {
+              display: block;
+              gap: 0px;
+              margin-top: 10px;
+              line-height: calc(11 / 14);
+              font-size: 14px;
+            }
+            @include mq(sp) {
+              gap: 0px;
+              display: block;
+              line-height: 1;
+            }
+
+            &:first-of-type {
+              margin-top: 36px;
+
+              @include mq(tab) {
+                margin-top: 20px;
+              }
+            }
+
+            p {
+              &:last-of-type {
+                @include mq(tab) {
+                  display: inline;
+                }
+              }
+            }
+            .first {
+              min-width: 208px;
+
+              @include mq(tab) {
+                // min-width: 100%;
+              }
+            } // first
+            .arrow {
+              @include mq(tab) {
+                display: inline;
+              }
+            }
+
+            br {
+              display: none;
+
+              @include mq(tab) {
+                display: block;
+              }
+            } // br
+          } // flex-text
+        } // texts
+      } // service-flow-item
+    } // items
+  } // container
+}
+// service-flow終了
+
+// service-price開始
+.service-price {
+  margin-top: 150px;
+
+  @include mq(sp) {
+    margin-top: 110px;
+  }
+
+  .container {
+    .service-price-items {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      text-align: center;
+      margin-top: 85px;
+
+      @include mq(tab) {
+        flex-direction: column;
+      }
+
+      @include mq(sp) {
+        gap: 50px;
+      }
+
+      .service-price-item {
+        @include mq(tab) {
+          min-width: 400px;
+          margin: 0 auto;
+        }
+        @include mq(sp) {
+          min-width: initial;
+        }
+
+        .item-top {
+          padding: 45px 0px 40px;
+          border: 3px solid $theme-blue;
+          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+          border-radius: 30px;
+
+          @include mq(tab) {
+            padding: 20px 0;
+          }
+
+          .lead {
+            line-height: 1;
+
+            @include mq(sp) {
+              font-size: 14px;
+            }
+          }
+          h3 {
+            font-size: 28px;
+            margin-top: 21px;
+            line-height: 1;
+
+            @include mq(sp) {
+              margin-top: 10px;
+              font-size: 32px;
+            }
+          }
+        } // item-top
+        .green-blue {
+          border: 3px solid $theme-blue-green;
+        }
+        .item-bottom {
+          margin-top: 30px;
+          border-radius: 30px;
+          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+          border-radius: 30px;
+
+          @include mq(sp) {
+            margin-top: 10px;
+          }
+
+          h4 {
+            @include co-headline-regular();
+            font-size: 24px;
+            letter-spacing: 0.05em;
+            border-radius: 30px 30px 0 0;
+            background-color: $theme-blue;
+            color: white;
+            padding: 10px 0;
+          } // h4
+          .green-blue {
+            background-color: $theme-blue-green;
+          }
+          .price {
+            padding-top: 105px;
+            padding-left: 46px;
+            padding-right: 46px;
+            font-size: 50px;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+
+            @include mq(tab) {
+              padding-left: 30px;
+              padding-right: 30px;
+            }
+            @include mq(sp) {
+              padding-top: 70px;
+              font-size: 47px;
+            }
+
+            span {
+              font-size: 16px;
+              font-weight: 400;
+            }
+          } // price
+          .storage {
+            padding-top: 90px;
+            max-width: 171px;
+            margin: 0 auto;
+            text-align: left;
+
+            @include mq(tab) {
+              padding-top: 58px;
+            }
+
+            span {
+              padding-left: 30px;
+            }
+          } // storage
+          .delivery {
+            padding-bottom: 52px;
+            max-width: 173.2px;
+            margin: 0 auto;
+            text-align: left;
+            padding-top: 15px;
+            span {
+              padding-left: 30px;
+            }
+          } // delivery
+        } // item-bottom
+      } // service-price-item
+    } // service-price-items
+  } // container
+}
+// service-price終了
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  service-price.html終了
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  company.html開始
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+// company開始
+.company {
+  margin-top: 190px;
+
+  @include mq(tab) {
+    margin-top: 120px;
+  }
+  @include mq(sp) {
+    margin-top: 80px;
+  }
+
+  .container {
+    .company-table {
+      width: 100%;
+      margin-top: 40px;
+      border-top: #f5f5f5 1px solid;
+      border-collapse: collapse;
+
+      @include mq(tab) {
+        margin-top: 80px;
+        border-top: none;
+      }
+      tr {
+        // justify-content: center;
+        // width: 100%;
+
+
+        &:first-child {
+          th {
+            margin-top: 0;
+          }
+        }
+
+        th {
+          min-width: 266px;
+          padding: 25px 36px;
+          text-align: left;
+          background-color: #f5f5f5;
+          border-bottom: #fff 1px solid;
+
+          @include mq(tab) {
+            width: 196px;
+            min-width: 196px;
+            display: block;
+            margin-top: 20px;
+            border-bottom: none;
+            font-size: 18px;
+            padding: 10px;
+          }
+          @include mq(sp){
+            font-size: 14px;
+          }
+        } // th
+        td {
+          border-bottom: #f5f5f5 1px solid;
+          border-right: #f5f5f5 1px solid;
+          padding: 35px 43px 33px;
+          display: block;
+          font-weight: bold;
+
+          @include mq(tab) {
+            width: 100%;
+            display: block;
+            border: #f5f5f5 1px solid;
+            padding: 13px 10px;
+          }
+        } // td
+      } // tr
+    } // company-table
+  } // container
+}
+// company終了
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  company.html終了
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  contact.html開始
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/
+// bottom-page-contact開始
+.bottom-page-contact {
+  margin-top: 120px;
+
+  @include mq(sp) {
+    margin-top: 90px;
+  }
+  .container {
+    .form-wrapper {
+      max-width: 600px;
+      margin: 50px auto 0;
+
+      @include mq(sp) {
+        margin-top: 77px;
+      }
+
+      dt {
+        margin-top: 25px;
+        label {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      } // dt
+      dd {
+        margin-top: 15px;
+        input {
+          padding: 20px;
+          background-color: #f5f5f5;
+          width: 100%;
+          border-radius: 10px;
+
+          &::placeholder {
+            color: #adadad;
+            font-size: 14px;
+          }
+        }
+        textarea {
+          padding: 20px;
+          background-color: #f5f5f5;
+          width: 100%;
+          height: 150px;
+          border-radius: 10px;
+        }
+      } // dd
+    } // form-wrapper
+    .green-blue-btn-wrapper {
+      margin-top: 50px;
+    }
+  } // container
+}
+// bottom-page-contact終了
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  contact.html終了
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  intermediary.html開始
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/
+
+// vision開始
+.vision {
+  padding-top: 180px;
+  padding-bottom: 140px;
+  background-color: #f5f5f5;
+
+  @include mq(tab) {
+    padding-top: 165px;
+    padding-bottom: 100px;
+  }
+  @include mq(sp) {
+    padding-top: 150px;
+    padding-bottom: 70px;
+  }
+
+  .container {
+
+    .title-wrapper .bottom-page-heading .english{
+      font-size: 20px;
+    } // title-wrapper
+    .vision-item {
+      margin-top: 55px;
+      background-image: linear-gradient(60deg, $theme-blue-green, $theme-blue);
+      padding: 97px 20px 53px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      border-radius: 50px;
+
+      @include mq(sp) {
+        padding: 75px 15px 40px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
+        margin-top: 50px;
+      }
+
+      h3 {
+        @include co-headline-bold();
+        font-size: 48px;
+        letter-spacing: 0.1em;
+
+        @include mq(tab) {
+          font-size: 36px;
+        }
+        @include mq(sp) {
+          font-size: 20px;
+        }
+      } // h3
+      p {
+        font-size: 18px;
+        line-height: calc(30 / 18);
+        letter-spacing: 0.05em;
+
+        @include mq(tab) {
+          font-size: 17px;
+        }
+        @include mq(sp) {
+          font-size: 16px;
+        }
+
+        .tab-show {
+          display: none;
+          @include mq(tab) {
+            display: block;
+          }
+        }
+      }
+      .mt-60 {
+        margin-top: 60px;
+
+        @include mq(tab) {
+          margin-top: 45px;
+        }
+        @include mq(sp) {
+          margin-top: 30px;
+        }
+      } // mt-60
+      .mt-40 {
+        margin-top: 40px;
+
+        @include mq(tab) {
+          margin-top: 30px;
+        }
+        @include mq(sp) {
+          margin-top: 20px;
+        }
+      }
+    } // vision-item
+  } // container
+}
+// vision終了
+
+// about-service開始
+.about-service {
+  margin-top: 110px;
+
+  @include mq(header) {
+    margin-top: 50px;
+  }
+  @include mq(sp) {
+    margin-top: 0px;
+  }
+
+  .about-service-img {
+    display: none;
+
+    @include mq(header) {
+      display: block;
+      width: 70%;
+      margin: 0 auto;
+    }
+    @include mq(tab) {
+      width: 80%;
+    }
+    @include mq(sp) {
+      width: 100%;
+    }
+  }
+  .container {
+    // max-width: 1200px;
+
+    .title-wrapper {
+      @include mq(header) {
+        margin-top: 80px;
+      }
+      .bottom-page-heading {
+        @include mq(sp) {
+          font-size: 34px;
+        }
+      }
+    }
+
+    .about-service-item {
+      margin-top: 95px;
+      display: flex;
+      gap: 30px;
+      align-items: flex-end;
+
+      @include mq(header) {
+        margin-top: 70px;
+      }
+      @include mq(sp) {
+        margin-top: 50px;
+      }
+
+      .item-left {
+        width: 50%;
+        // min-width: 550px;
+
+        @include mq(header) {
+          width: 100%;
+        }
+
+        p {
+          font-size: 20px;
+          letter-spacing: 0.1em;
+          line-height: 2;
+          margin-top: 50px;
+
+          @include mq(sp) {
+            font-size: 14px;
+            margin-top: 30px;
+          }
+
+          span {
+            @include co-headline-regular();
+          }
+          &:first-of-type {
+            margin-top: 0;
+          }
+        } // p
+      } // left
+      .item-right {
+        width: 50%;
+
+        @include mq(header) {
+          display: none;
+        }
+      } // right
+    } // about-service-item
+  } // container
+}
+// about-service終了
+
+// feature開始
+.feature {
+  margin-top: 200px;
+
+  @include mq(tab) {
+    margin-top: 160px;
+  }
+  @include mq(sp) {
+    margin-top: 100px;
+  }
+
+  .container {
+    .feature-items {
+      margin-top: 105px;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+
+      @include mq(tab) {
+        flex-direction: column;
+        align-items: center;
+      }
+      @include mq(sp) {
+        margin-top: 50px;
+      }
+
+      .feature-item {
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 300px;
+        height: 400px;
+        text-align: center;
+        border-radius: 0 0 20px 20px;
+
+        @include mq(tab) {
+          max-width: 70%;
+        }
+        @include mq(sp) {
+          max-width: 300px;
+          height: 370px;
+        }
+
+        h3 {
+          font-weight: 400;
+          letter-spacing: 0.05em;
+          font-size: 20px;
+          padding: 16px 0 11px;
+          background-color: $theme-blue;
+          color: white;
+          border-radius: 20px 20px 0 0;
+        } // h3
+        .feature-item-img {
+          padding-top: 20px;
+          width: 150px;
+          margin: 0 auto;
+
+          @include mq(sp) {
+            padding-top: 0;
+          }
+        } // img
+        .feature-item-text {
+          text-align: center;
+          letter-spacing: 0.05em;
+          padding-top: 15px;
+          // line-height: 1.6;
+        } // text
+        .mt-40 {
+          margin-top: 25px;
+        }
+      } // item
+    } // items
+    .green-blue-btn-wrapper {
+      margin-top: 80px;
+    }
+  } // container
+}
+// feature終了
+
+
+// flow開始
+.flow {
+  margin-top: 200px;
+  
+  @include mq(header) {
+    margin-top: 160px;
+  }
+  @include mq(sp) {
+    margin-top: 100px;
+  }
+  
+  .container {
+    // max-width: 1200px;
+    display: flex;
+    align-items: flex-start;
+    gap: 134px;
+    position: relative;
+
+    @include mq(header){
+      flex-direction: column;
+      gap: 54px;
+      position: static;
+    }
+
+    .title-wrapper {
+      min-width: 450px;
+      position: sticky;
+      top: 150px;
+
+      @include mq(header){
+        min-width: initial;
+        position: static;
+      }
+
+      .english {
+        font-size: 24px;
+
+        @include mq(sp){
+          font-size: 18px;
+          letter-spacing: .1em;
+        }
+      }
+    }
+    .flow-text-wrapper {
+      margin-top: 47px;
+
+      @include mq(header){
+        margin-top: 0;
+      }
+
+      .flow-text {
+        margin-bottom: 50px;
+
+        @include mq(header){
+          margin-bottom: 37px;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+
+        .num {
+          @include co-headline-bold();
+          font-size: 24px;
+          font-weight: bold;
+          color: $theme-blue;
+        } // num
+        h3 {
+          margin-top: 10px;
+          font-size: 32px;
+          letter-spacing: .05em;
+
+          @include mq(sp){
+            margin-top: 7px;
+            font-size: 24px;
+          }
+        }
+        .text {
+          margin-top: 20px;
+          letter-spacing: .05em;
+        }
+      } // text
+    } // text-wrapper
+  } // container
+}
+// flow終了
+
+
+// partner開始
+.partner-tab-img {
+  position: relative;
+  z-index: -1;
+  max-width: 70%;
+  margin: 0 auto;
+  margin-top: 100px;
+  display: none;
+
+  @include mq(header){
+    display: block;
+  }
+  @include mq(sp){
+    max-width: 100%;
+  }
+}
+.partner {
+  background-image: linear-gradient(90deg, $theme-blue-green, $theme-blue);
+  margin-top: 200px;
+  padding: 35px 0;
+
+  @include mq(header){
+    margin-top: -100px;
+    padding-top: 57px;
+    padding-bottom: 50px;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 75px;
+    max-width: 1200px;
+
+    @include mq(header){
+      display: block;
+    }
+
+
+    .left {
+
+      @include mq(header){
+        display: none;
+      }
+    } // left
+    .right {
+      color: white;
+    
+      h2 {
+        font-size: 32px;
+        letter-spacing: .1em;
+
+        @include mq(sp){
+          font-size: 22px;
+        }
+      } // h2
+      .text {
+        margin-top: 30px;
+        line-height: 30px;
+        letter-spacing: .1em;
+
+        @include mq(header){
+          margin-top: 57px;
+        }
+        .sp-show {
+          display: none;
+
+          @include mq(sp){
+            display: block;
+          }
+        }
+        .sp-hide {
+
+          @include mq(sp){
+            display: none;
+          }
+        }
+      } 
+      .btn-wrapper {
+        margin-top: 50px;
+        // text-align: left;
+    
+        @include mq(tab) {
+          text-align: center;
+          margin: 50px auto 0;
+        }
+        .btn {
+          max-width: 350px;
+          width: 100%;
+          text-align: center;
+
+          @include mq(sp){
+            margin: 0 auto;
+          }
+    
+          @include mq(sp-sm) {
+            max-width: 300px;
+          }
+    
+          a {
+            display: inline-block;
+            max-width: 350px;
+            width: 100%;
+            padding: 20px 50px;
+            border-radius: 100vh;
+            background-color: $theme-red;
+            color: white;
+            border: 3px solid $theme-red;
+            transition: all 0.3s;
+            font-weight: bold;
+    
+            &:hover {
+              color: $theme-red;
+              background-color: #fff;
+              opacity: 1;
+            }
+          }
+        } // btn
+      } // btn-wrapper
+    } //right 
+  } // container
+}
+// partner終了
+
+
+/*　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  intermediary.html終了
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー　*/

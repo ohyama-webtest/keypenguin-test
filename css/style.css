@@ -588,6 +588,38 @@ header .header-container .sp-hamburger .line3 {
   margin-top: 30px;
   padding-left: 24px;
   padding-right: 24px;
+  -webkit-animation-name: fadeUpFv;
+          animation-name: fadeUpFv;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+}
+@-webkit-keyframes fadeUpFv {
+  0% {
+    -webkit-transform: translateY(40px);
+            transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+@keyframes fadeUpFv {
+  0% {
+    -webkit-transform: translateY(40px);
+            transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
 }
 @media screen and (max-width: 500px) {
   .fv .fv-lead {

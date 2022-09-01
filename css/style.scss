@@ -531,6 +531,23 @@ header {
     margin-top: 30px;
     padding-left: 24px;
     padding-right: 24px;
+    animation-name: fadeUpFv;
+    animation-duration: 1s;
+    animation-delay: 3s;
+    animation-fill-mode: backwards;
+    
+    @keyframes fadeUpFv {
+      0% {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0px);
+        
+      }
+    }
+    
 
     @include mq(sp) {
       font-size: 16px;
